@@ -1,10 +1,18 @@
+import { Suspense } from 'react';
 import Link from 'next/link'
 import style from './page.module.scss'
 import MealsGrid from '@/Components/meals/mealsGrid'
 import { getMeals } from '@/lib/meals';
+
 //here we can simply get data with async and await no fetching is needed
-export default async function meals() {
+async function Meals()
+{
   const meals = await getMeals();
+  return (<MealsGrid meals={meals}/>)
+}
+
+export default  function MealsPage() {
+  
 
   return (
    <>
@@ -18,7 +26,9 @@ export default async function meals() {
     </p>
    </header>
    <main className={style.main}>
-    <MealsGrid meals={meals}/>
+    <Suspense fallback={<p className={style.loading}>Fetching Meals...</p>}>
+      <Meals/>
+    </Suspense>
    </main>
    </>
   )
