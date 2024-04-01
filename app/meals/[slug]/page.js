@@ -1,6 +1,9 @@
 import Image from "next/image"
 import style from './page.module.scss'
-export default function meals() {
+import { getMeal } from "@/lib/meals"
+import { notFound } from "next/navigation";
+export default function meals({params}) {
+  const meal=getMeal(params.slug);
     return (
       <>
       <header className={style.header}>
@@ -9,7 +12,7 @@ export default function meals() {
         </div>
         <div className={style.headerText}>
           <h1>TITLE</h1>
-          <p className={style.creator}>by <a href={`mailto:${'EMAIL'}`}>Name</a></p>
+          <p className={style.creator}>by <a href={`mailto:${'EMAIL'}`}>Muskan</a></p>
           <p className={style.summary}>Summary</p>
         </div>
       </header>
